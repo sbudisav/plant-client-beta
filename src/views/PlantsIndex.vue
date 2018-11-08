@@ -1,14 +1,24 @@
 <template>
-  <div class="home">
-    <h1>{{message}}</h1>
-      <div v-for="plant in plants">
-      <router-link class="nav-link" v-bind:to="'/plants/'+ plant.id"> <h2> {{plant.name}} </h2> </router-link>
-      <h3> {{plant.description}} </h3> 
-
+ <div class="gallery">
+   <div class="container">
+    <div v-for="plant in plants">
+      <div class="col-md-4">
+        <router-link class="nav-link" v-bind:to="'/plants/'+ plant.id">
+        <figure class="effect-marley">
+          <img v-bind:src="plant.default_image_url" alt="" class="img-responsive" style="width:480px;height:360px;"/> 
+          <figcaption>
+            <h4> {{plant.name}} </h4>
+            <p> {{plant.description}} </p>
+          </figcaption>
+        </figure>
+      </router-link>
+      </div>
     </div> 
-
-  </div>
+  </div> 
+</div>
 </template>
+
+
 
 <style>
 </style>
@@ -34,7 +44,26 @@ export default {
     }.bind(this));
 
   },
-  methods: {},
+  methods: {
+
+
+    submit: function() {
+      var params = {
+        plant: this.id,
+      };
+      axios
+        .post("/api/user_plants", params)
+        .then(response => {
+          this.$router.push("/recipes/" + response.data.id);
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
+    }
+
+
+    
+  },
   computed: {}
 };
 </script>

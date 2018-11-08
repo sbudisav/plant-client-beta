@@ -1,7 +1,10 @@
 <template>
-  <div class="plants-show">
+  <div class="plants-show" style="color:black;">
     <h1>{{ plant.name }}</h1>
     <h4> {{ plant.bionominal }}</h4>
+    <form  v-on:submit.prevent="submit()">
+      <button type="submit" id="btn-form-contact">Add This Plant to My Plants</button>
+    </form>
     <ol>
       <li> {{plant.description}} </li>
       <li> Sunlight Preference: {{plant.sun_pref}} </li>
@@ -17,6 +20,7 @@
 
 <script>
 var axios = require('axios');
+
 export default {
   data: function() {
     return {
@@ -35,7 +39,24 @@ export default {
       this.plant = response.data;
     });
   },
-  methods: {},
+  methods: {
+
+    submit: function() {
+      var params = {
+        plant_id: this.$route.params.id
+      };
+      axios
+        .post("http://localhost:3000/api/user_plants", params)
+        .then(response => {
+          this.$router.push("/user_plants");
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
+    }
+
+
+  },
   computed: {}
 };
 </script>

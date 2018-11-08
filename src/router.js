@@ -5,6 +5,8 @@ import PlantsIndex from './views/PlantsIndex.vue';
 import PlantsNew from './views/PlantsNew.vue';
 import PlantsShow from './views/PlantsShow.vue';
 import UserPlants from './views/UserPlants.vue';
+import UserSchedule from './views/UserSchedule.vue';
+import UserPlantEdit from './views/UserPlantEdit.vue';
 
 import Signup from './views/Signup.vue';
 import Login from "./views/Login.vue";
@@ -19,6 +21,8 @@ export default new Router({
     { path: '/plants/new', name: 'plants-new', component: PlantsNew },
     { path: '/plants/:id', name: 'plants-show', component: PlantsShow },
     { path: '/userplants', name: 'user-plants', component: UserPlants},
+    { path: '/userschedule', name: 'user-schedule', component: UserSchedule},
+    { path: '/user_plants/:id', name: 'user-plant-edit', component: UserPlantEdit},
     
     { path: '/signup', name: 'signup', component: Signup },
     { path: "/login", name: "login", component: Login },
