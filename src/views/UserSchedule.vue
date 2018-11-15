@@ -2,26 +2,25 @@
 
 <div class="services">
   <div class="container">
-    <div v-for="plant in userPlant">
-<!--        <img src="https://visualpharm.com/assets/501/Potted%20Plant-595b40b75ba036ed117d8359.svg" height="70">  come back to this-->
-        <div class="col-md-10 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
-          <br>
-          <h2> {{plant.nickname }}, last watered {{plant.formatted.days_since}} days ago</h2>
-          <p style="color:black;"> Needs to be watered in {{plant.water_freq}} days.
-            <form class="form-inline" v-on:submit.prevent="submit()">
-               <label style="color:black"> I last watered this plant: </label>
-               <select class="form-control" id="last watered" v-mode="last_watered">
-                <option value="today">Today</option>
-                <option value="yesterday">Yesterday</option>
-                <option value="3 days">3 days ago</option>
-                <option value="4 days">4 days ago</option>
-                <option value="5 days">5 days ago</option>
-                <option value="6 days+">6+ days ago</option>
-              </select>
-              <button type="submit" class="btn btn-primary"> Submit </button>
-            </form>
-          </p>
-        </div>
+    <div v-for="plant in userPlants">
+      <div class="col-md-10 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+        <br>
+        <h2> {{plant.nickname }} ({{plant.plant}}) needs to be watered on {{plant.formatted.next_water_formatted}}</h2>
+        <p style="color:black;font-size:140%;"> Was last watered {{plant.formatted.days_since}} days ago, and will need water in {{plant.formatted.days_till}} days</p>
+        <form class="form-inline" v-on:submit.prevent="submit(plant)">
+           <label style="color:black"> I last watered this plant: </label>
+           <select class="form-control" id="last watered" v-model="updatedWatered">
+            <option value="0">Today</option>
+            <option value="1">Yesterday</option>
+            <option value="2">3 days ago</option>
+            <option value="3">4 days ago</option>
+            <option value="4">5 days ago</option>
+            <option value="5">6+ days ago</option>
+          </select>
+          <button type="submit" class="btn btn-primary"> Submit </button>
+        </form>
+        <hr>
+      </div>
     </div>
   </div>
 </div>
@@ -33,15 +32,23 @@ var axios = require('axios');
 export default {
   data: function() {
     return {
-      userPlant:{
+      updatedWatered: 0,
+      userPlants: [
+        {
+          id: "",
           plant: "",
           nickname: "",
           sun_placement: "",
           sun_pref: "",
           last_watered: "",
           images: [],
-          water_freq: ""
+          water_freq: "",
+          formatted: {
+            days_since: "",
+            next_water_formatted: ""
           }
+        }
+        ]
     };
   },
   created: function() {
@@ -49,18 +56,20 @@ export default {
     .get("http://localhost:3000/api/user_plants/")
     .then(response => {
       console.log(response.data);
-      this.userPlant = response.data;
+      this.userPlants = response.data;
     });
   },
   methods: {
-    submit: function() {
+
+    submit: function(plant) {
       var params = {
-        last_watered: this.last_watered
+        last_watered: this.updatedWatered
       };
       axios
-        .patch("/api/user_plants", params)
+        .patch("http://localhost:3000/api/user_plants/" + plant.id, params)
         .then(response => {
-          this.$router.push("/user_plants/" + response.data.id);
+          this.userPlants = response.data;
+          this.updatedWatered = 0;
         })
         .catch(error => {
           this.errors = error.response.data.errors;

@@ -22,7 +22,7 @@ export default new Router({
     { path: '/plants/:id', name: 'plants-show', component: PlantsShow },
     { path: '/userplants', name: 'user-plants', component: UserPlants},
     { path: '/userschedule', name: 'user-schedule', component: UserSchedule},
-    { path: '/user_plants/:id', name: 'user-plant-edit', component: UserPlantEdit},
+    { path: '/userplants/:id', name: 'user-plant-edit', component: UserPlantEdit},
     
     { path: '/signup', name: 'signup', component: Signup },
     { path: "/login", name: "login", component: Login },

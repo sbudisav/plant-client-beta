@@ -48,7 +48,7 @@ export default {
       axios
         .post("http://localhost:3000/api/user_plants", params)
         .then(response => {
-          this.$router.push("/user_plants");
+          this.$router.push("/userplants");
         })
         .catch(error => {
           this.errors = error.response.data.errors;

@@ -1,4 +1,4 @@
-n<template>
+<template>
   <div id="app">
   <header id="header">
     <nav class="navbar navbar-default navbar-static-top" role="banner">

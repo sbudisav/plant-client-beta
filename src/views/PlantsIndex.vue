@@ -54,7 +54,7 @@ export default {
       axios
         .post("/api/user_plants", params)
         .then(response => {
-          this.$router.push("/recipes/" + response.data.id);
+          this.$router.push("/plants/" + response.data.id);
         })
         .catch(error => {
           this.errors = error.response.data.errors;
@@ -62,7 +62,7 @@ export default {
     }
 
 
-    
+
   },
   computed: {}
 };

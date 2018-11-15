@@ -1,17 +1,21 @@
 <template>
   <div class="gallery">
-  <div class="container" style="color:black;">
-  <router-link to="/Plants">Add More Plants</router-link>
-    <div class="col-md-12">
-    <div v-for="plant in userPlant">
-      <h1>{{ plant.nickname }} the {{plant.plant}}</h1>
-      <h4> Is getting a {{ plant.sun_placement }} amount of sunlight</h4>
-      <ul>
-        <li> You last watered this {{plant.formatted.days_since}} days ago</li>
-        <li> Sunlight Preference: {{plant.sun_pref}} </li>
-      </ul>
-      <router-link class="nav-link" v-bind:to="'/user_plants/'+ plant.id"> Edit Plant </router-link>
-    </div>
+    <div class="container" style="color:black;">
+      <router-link to="/Plants" class="btn btn-primary btn-lg">Add More Plants</router-link>
+      <hr size="30">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12">
+          <div v-for="plant in userPlant">
+            <h1>{{ plant.nickname }} the {{plant.plant}}</h1>
+            <img v-bind:src="plant.image" style="width:180px;"/> 
+            <h3> You last watered this {{ plant.formatted.days_since }} days ago</h3>
+            <h4> This plant is getting a {{ plant.sun_placement }} amount of sunlight</h4>
+            <router-link class="btn btn-primary btn-lg" v-bind:to="'/userplants/'+ plant.id"> Edit Plant </router-link>
+            <hr>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -31,9 +35,10 @@ export default {
           sun_pref: "",
           last_watered: "",
           formatted: {
+            formatted_last_water: "",
             days_since: ""
           },
-          images: []
+          image:""
           }
     };
   },
