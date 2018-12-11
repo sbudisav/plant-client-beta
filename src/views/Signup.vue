@@ -15,6 +15,10 @@
           <input type="username" class="form-control" v-model="username">
         </div>
         <div class="form-group">
+          <label>Zip Code:</label>
+          <input type="text" class="form-control" v-model.number="zip"
+        </div>
+        <div class="form-group">
           <label>Password:</label>
           <input type="password" class="form-control" v-model="password">
         </div>
