@@ -48,7 +48,7 @@ a:hover {
 .btn {
 	border-radius:0;
 	margin-top:10px;
-	background-color: #65AAF0;
+	background-color: #6da01b;
 	text-transform:uppercase;
 	border-color:#fff;
 	font-size:14px;
@@ -139,8 +139,8 @@ a:hover {
 }
 
 .navbar-default {
-	background-color: #65AAF0;
-	border-color:#65AAF0;
+	background-color: #6da01b;
+	border-color:#6da01b;
 }
 
 /*===========================
@@ -175,15 +175,15 @@ a:hover {
 	position: absolute;
 	top: 50%;
 	width: 50px;
-	color:#65AAF0;
-	background:#65AAF0;
+	color:#6da01b;
+	background:#6da01b;
 	color:#fff;
 }
 
 #carousel-slider a i:hover {
-	background:#65AAF0;
+	background:#6da01b;
 	color:#fff;
-	border: 1px solid #65AAF0;
+	border: 1px solid #6da01b;
 }
 
 #carousel-slider 
@@ -229,7 +229,7 @@ a:hover {
 	margin-bottom:20px;
 	color:#fff;
 	padding:10px;
-	background:#65AAF0;
+	background:#6da01b;
 }
 
 @media (max-width: 767px) {
@@ -244,7 +244,7 @@ a:hover {
 .carousel-inner .form-inline .form-group button[type="livedemo"]{
 	padding:20px 60px;
 	font-size:20px;
-	background:#65AAF0;
+	background:#6da01b;
 	color:#fff;
 	border-radius:0;
 	border-color:#fff;
@@ -273,7 +273,7 @@ a:hover {
 .carousel-inner .form-inline .form-group button[type="getnow"]:hover {
 	color:#fff;
 	border-color:#fff;
-	background:#65AAF0;
+	background:#6da01b;
 	-webkit-transition: color 300ms, background-color 300ms;
   -moz-transition: color 300ms, background-color 300ms;
   -o-transition:  color 300ms, background-color 300ms;
@@ -978,7 +978,7 @@ textarea#message{
 ============================ */
 footer {
 	padding:50px;
-	background:#65AAF0;
+	background:#6da01b;
 }
 
 footer p {

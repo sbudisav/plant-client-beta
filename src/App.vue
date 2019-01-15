@@ -12,6 +12,7 @@
                     </button>
           <div class="navbar-brand">
             <a href="index.html"><h1>Plant.me</h1></a>
+            <img src="icon.png" height="170" width="170" alt=""/>
           </div>
         </div>
         <div class="navbar-collapse collapse">

@@ -5,8 +5,16 @@
     <div v-for="plant in userPlants">
       <div class="col-md-10 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
         <br>
-        <h2> {{plant.nickname }} ({{plant.plant}}) needs to be watered on {{plant.formatted.next_water_formatted}}</h2>
-        <p style="color:black;font-size:140%;"> Was last watered {{plant.formatted.days_since}} days ago, and will need water in {{plant.formatted.days_till}} days</p>
+        <div v-if="plant.formatted.days_till > 0">
+          <h2> {{plant.nickname }} ({{plant.plant}}) needs to be watered on {{plant.formatted.next_water_formatted}}</h2>
+          <p style="color:black;font-size:140%;"> Was last watered {{plant.formatted.days_since}} days ago, and will need water in {{plant.formatted.days_till}} days</p>
+        </div> 
+        <div v-if="plant.formatted.days_till < 0 && plant.formatted.days_till > -14">
+          <h2> {{plant.nickname }} ({{plant.plant}}) needs to be watered today! It's been {{plant.formatted.days_since}} days!</h2>
+        </div>
+        <div v-if="plant.formatted.days_till <= -14">
+          <h2> {{plant.nickname }} ({{plant.plant}}) badly needs water! It's been {{plant.formatted.days_since}} days!!</h2>
+        </div>
         <form class="form-inline" v-on:submit.prevent="submit(plant)">
            <label style="color:black"> I last watered this plant: </label>
            <select class="form-control" id="last watered" v-model="updatedWatered">

@@ -16,8 +16,9 @@
         </div>
         <div class="form-group">
           <label>Zip Code:</label>
-          <input type="text" class="form-control" v-model.number="zip"
+          <input type="text" v-model="zip" maxlength="5" placeholder="ex: 94301" class="form-control"/>
         </div>
+
         <div class="form-group">
           <label>Password:</label>
           <input type="password" class="form-control" v-model="password">
@@ -42,15 +43,37 @@ export default {
       username: "",
       password: "",
       passwordConfirmation: "",
+      zip: "",
       errors: []
     };
   },
   methods: {
+
+  getCity: function() {
+    let self = this;
+    $.getJSON("https://ZiptasticAPI.com/" + this.zip, function(result) {
+      if (result.error) {
+        self.error = "zip code not found";
+        self.city = "";
+        $(".error").addClass("no");
+      } else {
+        self.city = result.city + "," + result.state;
+        $(".display").addClass("animated fadeInDown");
+      }
+      console.log(result);
+    });
+  },
+    mounted: function(){
+      this.getCity();
+  },
+
+
     submit: function() {
       var params = {
         name: this.name,
         username: this.username,
         password: this.password,
+        location: this.zip,
         password_confirmation: this.passwordConfirmation
       };
       axios
@@ -61,6 +84,20 @@ export default {
         .catch(error => {
           this.errors = error.response.data.errors;
         });
+    }
+  },
+  watch: {
+    zip: function() {
+      if (this.zip.length === 5) {
+        this.getCity();
+        this.error = "";
+        $(".error").removeClass("no");
+      }
+      if (this.zip.length < 5) {
+        this.city = "";
+        this.error = "please enter a valid zipcode";
+        $(".error").addClass("no");
+      }
     }
   }
 };
